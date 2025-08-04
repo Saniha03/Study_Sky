@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
-import { StudyLog } from "../types/types";
+import React, { useState, useEffect, useRef } from 'react';
+import { StudyLog } from '../types/types';
 
 interface StudyTimerProps {
   onStudyLogsUpdate: (logs: StudyLog[]) => void;
@@ -9,33 +9,28 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
   const [customMinutes, setCustomMinutes] = useState<number>(25);
   const [pomodoroMinutes, setPomodoroMinutes] = useState<number>(25);
   const [breakMinutes, setBreakMinutes] = useState<number>(5);
-  const [currentTimer, setCurrentTimer] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
-  const [timerType, setTimerType] = useState<string>("custom");
+  const [timerType, setTimerType] = useState<string>('custom');
   const [isBreak, setIsBreak] = useState<boolean>(false);
   const [pomodoroCount, setPomodoroCount] = useState<number>(0);
   const [studyLogs, setStudyLogs] = useState<StudyLog[]>([]);
-  const [logHours, setLogHours] = useState<string>("");
-  const [logSubject, setLogSubject] = useState<string>("");
-  const [logDate, setLogDate] = useState<string>(
-    new Date().toISOString().split("T")[0]
-  );
+  const [logHours, setLogHours] = useState<string>('');
+  const [logSubject, setLogSubject] = useState<string>('');
+  const [logDate, setLogDate] = useState<string>(new Date().toISOString().split('T')[0]);
 
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const formatTime = (seconds: number): string => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
       intervalRef.current = setInterval(() => {
-        setTimeLeft((prev) => prev - 1);
+        setTimeLeft(prev => prev - 1);
       }, 1000);
     } else if (timeLeft === 0 && isRunning) {
       handleTimerComplete();
@@ -48,9 +43,9 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
 
   const handleTimerComplete = () => {
     setIsRunning(false);
-    if (timerType === "pomodoro") {
+    if (timerType === 'pomodoro') {
       if (!isBreak) {
-        setPomodoroCount((prev) => prev + 1);
+        setPomodoroCount(prev => prev + 1);
         setIsBreak(true);
         setTimeLeft(breakMinutes * 60);
       } else {
@@ -62,7 +57,7 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
 
   const startTimer = (type: string) => {
     setTimerType(type);
-    if (type === "custom") {
+    if (type === 'custom') {
       setTimeLeft(customMinutes * 60);
     } else {
       setTimeLeft(pomodoroMinutes * 60);
@@ -77,7 +72,7 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
 
   const resetTimer = () => {
     setIsRunning(false);
-    setTimeLeft(0);
+    setTimeLeft( ihtiyar
     setIsBreak(false);
   };
 
@@ -92,8 +87,8 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
       const updatedLogs = [...studyLogs, newLog];
       setStudyLogs(updatedLogs);
       onStudyLogsUpdate(updatedLogs);
-      setLogHours("");
-      setLogSubject("");
+      setLogHours('');
+      setLogSubject('');
     }
   };
 
@@ -115,28 +110,23 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
         <div className="text-6xl font-bold pink-accent mb-4 accent-font">
           {formatTime(timeLeft)}
         </div>
-        {timerType === "pomodoro" && (
+        {timerType === 'pomodoro' && (
           <div className="text-lg mb-4">
-            <span
-              className={`px-3 py-1 rounded-full ${
-                isBreak ? "pink-bg" : "sky-blue-bg"
-              } pink-accent`}
-            >
-              {isBreak ? "Break Time" : "Study Time"} | Pomodoros:{" "}
-              {pomodoroCount}
+            <span className={`px-3 py-1 rounded-full ${isBreak ? 'pink-bg' : 'sky-blue-bg'} pink-accent`}>
+              {isBreak ? 'Break Time' : 'Study Time'} | Pomodoros: {pomodoroCount}
             </span>
           </div>
         )}
         <div className="flex justify-center space-x-4">
           <button
-            onClick={() => startTimer("custom")}
+            onClick={() => startTimer('custom')}
             disabled={isRunning}
             className="px-6 py-3 bg-green-500 hover:bg-green-600 text-white rounded-lg disabled:opacity-50"
           >
             <i className="fas fa-play mr-2"></i>Start Custom
           </button>
           <button
-            onClick={() => startTimer("pomodoro")}
+            onClick={() => startTimer('pomodoro')}
             disabled={isRunning}
             className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg disabled:opacity-50"
           >
@@ -170,9 +160,7 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
               <input
                 type="number"
                 value={customMinutes}
-                onChange={(e) =>
-                  setCustomMinutes(parseInt(e.target.value) || 0)
-                }
+                onChange={(e) => setCustomMinutes(parseInt(e.target.value) || 0)}
                 className="w-full input-glow"
                 min="1"
                 max="180"
@@ -191,9 +179,7 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
               <input
                 type="number"
                 value={pomodoroMinutes}
-                onChange={(e) =>
-                  setPomodoroMinutes(parseInt(e.target.value) || 25)
-                }
+                onChange={(e) => setPomodoroMinutes(parseInt(e.target.value) || 25)}
                 className="w-full input-glow"
                 min="1"
                 max="60"
@@ -263,23 +249,16 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
         {/* Study Logs Display */}
         {studyLogs.length > 0 && (
           <div className="mt-6">
-            <h4 className="pink-accent font-semibold mb-3">
-              Recent Study Logs:
-            </h4>
+            <h4 className="pink-accent font-semibold mb-3">Recent Study Logs:</h4>
             <div className="space-y-2 max-h-40 overflow-y-auto">
-              {studyLogs
-                .slice(-5)
-                .reverse()
-                .map((log) => (
-                  <div key={log.id} className="bg-white/10 rounded-lg p-3">
-                    <div className="flex justify-between items-center pink-accent">
-                      <span>{log.date}</span>
-                      <span>
-                        {log.hours}h - {log.subject}
-                      </span>
-                    </div>
+              {studyLogs.slice(-5).reverse().map(log => (
+                <div key={log.id} className="bg-white/10 rounded-lg p-3">
+                  <div className="flex justify-between items-center pink-accent">
+                    <span>{log.date}</span>
+                    <span>{log.hours}h - {log.subject}</span>
                   </div>
-                ))}
+                </div>
+              ))}
             </div>
           </div>
         )}
