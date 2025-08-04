@@ -72,7 +72,7 @@ const StudyTimer: React.FC<StudyTimerProps> = ({ onStudyLogsUpdate }) => {
 
   const resetTimer = () => {
     setIsRunning(false);
-    setTimeLeft( ihtiyar
+    setTimeLeft(0);
     setIsBreak(false);
   };
 
