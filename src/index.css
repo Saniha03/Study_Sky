@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #6ad3f2 0%, #b8e6f9 50%, #6ad3f2 100%);
+  min-height: 100vh;
+  color: #f672e4; /* Deep pink font color for body text */
+}
+
+.heading-font {
+  font-family: "Comic Neue", cursive;
+  color: #f672e4; /* Deep pink for headings */
+}
+
+.body-font {
+  font-family: "Poppins", sans-serif;
+  color: #f672e4; /* Deep pink for body text */
+}
+
+.accent-font {
+  font-family: "Quicksand", sans-serif;
+  color: #f672e4; /* Deep pink for accent text */
+}
+
+.sky-gradient {
+  background: linear-gradient(135deg, #6ad3f2 0%, #b8e6f9 100%);
+}
+
+.cloud-bg {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.glass-effect {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pink-accent {
+  color: #f672e4; /* Deep pink for icons and accents */
+}
+
+.pink-bg {
+  background-color: #f672e4; /* Deep pink for backgrounds */
+}
+
+.sky-blue {
+  color: #6ad3f2; /* Deeper sky blue for text */
+}
+
+.sky-blue-bg {
+  background-color: #6ad3f2; /* Deeper sky blue for backgrounds */
+}
+
+.input-glow {
+  background-color: #ffffff; /* White background for input boxes */
+  box-shadow: 0 0 10px rgba(246, 114, 228, 0.7); /* Glowing effect with deep pink */
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  color: #333; /* Dark text for contrast on white background */
+}
+
+.input-glow::placeholder {
+  color: #666; /* Slightly lighter placeholder text */
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.twinkling {
+  animation: twinkle 2s ease-in-out infinite;
+}
